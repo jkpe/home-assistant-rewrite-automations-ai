@@ -21,7 +21,11 @@ Call GPT-4o using [llm](https://llm.datasette.io/en/stable/) to rewrite the alia
 
 usage: llm-rewrite-json.py [-h] (-d DIRECTORY | -f FILE)
 
- The script will iterate over each JSON file in directory `output-split-json` and for each file succesfully processed add it's file name to `processed_files.log`, this allows you to run the script again on the same directory of files if the llm fails to process an individual automation.
+ The script will iterate over each JSON file in directory `output-split-json` and send it to GPT-4o for processing. GPT-4o will analyse each automation and work out what it does giving it a new title (alias) and description for each. Every file succesfully processed will be logged to `processed_files.log`, this allows you to run the script again on the same directory of files if the LLM fails to process an individual automation.
+
+ The script works by piping each JSON into GPT-4o with a custom prompt
+
+`cat {file} | llm -m gpt-4o --no-stream -s "Based on what this Home Assistant automation does and how it works, rewrite a new Alias and Description for it. In your response just give me the updated alias and description. Respond with JSON objects."`
 
 ## Convert the rewritten JSON back to YAML
 
