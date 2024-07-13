@@ -1,0 +1,19 @@
+# requirements.txt
+
+# For JSON and YAML processing
+PyYAML==6.0
+
+# For making subprocess calls to external commands
+subprocess32==3.5.4
+
+# For argument parsing
+argparse==1.4.0
+
+# For file and directory operations
+os==0.1.4
+
+# For JSON handling
+json==2.0.9
+
+# For calling the LLM
+llm==0.14
