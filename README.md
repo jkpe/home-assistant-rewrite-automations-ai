@@ -19,7 +19,7 @@ Call GPT-4o using [llm](https://llm.datasette.io/en/stable/) to rewrite the alia
 
 `python3 llm-rewrite-json.py -d output-split-json`
 
-usage: llm-rewrite-json.py [-h] (-d DIRECTORY | -f FILE)
+usage: `llm-rewrite-json.py [-h] (-d DIRECTORY | -f FILE)`
 
  The script is designed to iterate over each JSON file in the `output-split-json` directory and send it to GPT-4o for processing. GPT-4o will analyze each automation, determine its function, and generate a new title (alias) and description for it. Successfully processed files will be logged in `processed_files.log.` This logging mechanism allows you to rerun the script on the same directory if the LLM fails to process any individual automation.
 
