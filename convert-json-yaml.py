@@ -7,7 +7,7 @@ def convert_json_to_yaml(input_dir, output_file):
     yaml_data = []
 
     # Define the order of keys to be maintained
-    key_order = ['id', 'alias', 'description']
+    key_order = ['id', 'alias', 'description', 'trigger', 'condition', 'action']
 
     # Loop through each file in the directory
     for filename in os.listdir(input_dir):
@@ -15,25 +15,13 @@ def convert_json_to_yaml(input_dir, output_file):
             file_path = os.path.join(input_dir, filename)
             with open(file_path, 'r') as json_file:
                 data = json.load(json_file)
-
-                # Check for use_blueprint key and remove specific keys if it exists
-                if 'use_blueprint' in data:
-                    keys_to_skip = {'trigger', 'condition', 'action'}
-                else:
-                    keys_to_skip = set()
                 
-                # Create an ordered dictionary to maintain key order and skip certain keys if necessary
+                # Create an ordered dictionary to maintain key order
                 ordered_data = {key: data.get(key) for key in key_order}
                 
-                if not keys_to_skip:
-                    # Add optional keys only if they should not be skipped
-                    optional_keys = ['trigger', 'condition', 'action']
-                    for key in optional_keys:
-                        ordered_data[key] = data.get(key)
-
-                # Add any remaining keys that are not in the predefined order or skipped list 
+                # Add any remaining keys that are not in the predefined order
                 for key in data:
-                    if (key not in ordered_data) and (key not in keys_to_skip):
+                    if key not in ordered_data:
                         ordered_data[key] = data[key]
                 
                 yaml_data.append(ordered_data)
